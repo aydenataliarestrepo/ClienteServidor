@@ -1,5 +1,6 @@
 #Provee la comunicación 
 import zmq 
+import sys 
 
 #Utilizo una caja para crear el socket
 context = zmq.Context()
@@ -10,8 +11,11 @@ s=context.socket(zmq.REQ)
 #Conecto el socekt con el equipo local en el puerto  8001 
 s.connect('tcp://localhost:8001')
 
+#Almacenar 
+name = sys.argv[1]
+
 #Envio el mensaje al servidor 
-s.send_string("Hola")
+s.send_string("Hola - desde {}".formar(name))
 
 #Almaceno la respuesta del servidor 
 m=s.recv_string()
